@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Bunda 💗</title>
+
+<style>
+:root {
+  --pink: #ff70c8;
+  --purple: #9b5cff;
+  --bg: #160b2d;
+  --glass: rgba(255,255,255,.09);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  background:
+    radial-gradient(ellipse at top left,#59266e,transparent 55%),
+    radial-gradient(ellipse at bottom right,#421d77,transparent 50%),
+    var(--bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+#hearts {
+  position: fixed; inset: 0;
+  pointer-events: none; overflow: hidden;
+  z-index: 10;
+}
+.heart {
+  position: absolute; bottom: -50px;
+  animation: fall linear forwards;
+  filter: drop-shadow(0 0 8px currentColor);
+  opacity: .8;
+}
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0); opacity: 0; }
+  10% { opacity: .9; }
+  100% { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
+}
+#login {
+  min-height: 100vh;
+  display: grid; place-items: center;
+  padding: 24px;
+}
+.login-card, .panel, .nav, .topbar {
+  background: var(--glass);
+  border: 1px solid rgba(255,255,255,.16);
+  backdrop-filter: blur(18px);
+  border-radius: 24px;
+  box-shadow: 0 15px 50px #0002;
+}
+.login-card {
+  text-align: center; padding: 36px 24px;
+  width: 100%; max-width: 420px;
+}
+.logo { font-size: 65px; animation: pulse 2s infinite; }
+@keyframes pulse {
+  50% { transform: scale(1.12); }
+}
+h1, h2 { margin-top: 0; }
+.gradient {
+  background: linear-gradient(90deg,#ff91dc,#c5a1ff,#ff91dc);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+p { line-height: 1.8; color: #eee0ff; }
+input, textarea {
+  width: 100%; padding: 14px;
+  border: 1px solid #ffffff30;
+  border-radius: 13px;
+  background: #ffffff10; color: white;
+  outline: none; margin: 8px 0 14px;
+}
+input::placeholder, textarea::placeholder { color: #d2bce8; }
+.btn {
+  border: none; border-radius: 14px;
+  padding: 13px 19px; color: white;
+  background: linear-gradient(110deg,#ff60bd,#9157ff);
+  box-shadow: 0 5px 20px #c45cff35;
+  transition: .25s;
+}
+.btn:hover { transform: translateY(-2px); filter: brightness(1.12); }
+.btn.secondary { background: #ffffff15; border: 1px solid #ffffff25; }
+.small { font-size: 12px; color: #d8c4ef; }
+#app { display: none; max-width: 1100px; margin: auto; padding: 20px; }
+.topbar {
+  padding: 18px; display: flex;
+  align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 18px; flex-wrap: wrap;
+}
+.topbar h2 { margin: 0; font-size: 20px; }
+.nav {
+  display: flex; gap: 8px; padding: 10px;
+  overflow-x: auto; margin-bottom: 20px;
+}
+.nav button {
+  flex-shrink: 0; color: #e8d8ff;
+  background: transparent; border: 0;
+  border-radius: 12px; padding: 12px 14px;
+}
+.nav button.active {
+  background: linear-gradient(110deg,#ff60bd,#9157ff);
+  color: white;
+}
+.panel { padding: 25px; margin-bottom: 18px; }
+.page { display: none; animation: appear .4s ease; }
+.page.active { display: block; }
+@keyframes appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero { text-align: center; padding: 45px 20px; }
+.hero .big { font-size: 75px; }
+.cards {
+  display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 14px;
+}
+.mini {
+  padding: 20px; border-radius: 18px;
+  background: #ffffff0b; border: 1px solid #ffffff12;
+}
+.mini .emoji { font-size: 30px; }
+.letter {
+  white-space: pre-line; font-size: 17px;
+  line-height: 2; color: #fff0fc;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+  gap: 12px; margin-top: 15px;
+}
+.gallery img {
+  width: 100%; aspect-ratio: 1;
+  object-fit: cover; border-radius: 16px;
+  border: 1px solid #ffffff30;
+}
+.reason {
+  padding: 15px; margin: 10px 0;
+  border-radius: 14px; background: #ffffff0c;
+}
+.counter { font-size: 35px; font-weight: bold; color: #ff9adf; }
+footer { text-align: center; padding: 22px; color: #c9b3e4; }
+#toast {
+  position: fixed; bottom: 20px; left: 50%;
+  transform: translateX(-50%); z-index: 20;
+  background: #54266c; border: 1px solid #ffffff35;
+  border-radius: 14px; padding: 13px 18px;
+  display: none; max-width: 90%; text-align: center;
+}
+@media(max-width:550px) {
+  #app { padding: 12px; }
+  .cards { grid-template-columns: 1fr; }
+  .panel { padding: 18px; }
+  .hero { padding: 28px 8px; }
+  .hero .big { font-size: 58px; }
+}
+</style>
+</head>
+
+<body>
+<div id="hearts"></div>
+<div id="toast"></div>
+
+<!-- GERBANG NAMA -->
+<section id="login">
+  <div class="login-card">
+    <div class="logo">💗</div>
+    <h1 class="gradient">Untuk Bunda</h1>
+    <p>
+      Ada sebuah tempat kecil yang berisi cinta,
+      doa, dan kenangan khusus untuk Bunda.
+    </p>
+    <p class="small">MASUKKAN NAMA ANAK TERSAYANG</p>
+    <form id="loginForm">
+      <input id="password" placeholder="Nama anakku..." autocomplete="off" required>
+      <button class="btn" style="width:100%">Buka Surat 💌</button>
+    </form>
+    <p class="small">Sebuah hadiah kecil dari hati yang paling tulus.</p>
+  </div>
+</section>
+
+<!-- WEBSITE UTAMA -->
+<main id="app">
+  <header class="topbar">
+    <div>
+      <h2 class="gradient">💗 Bunda's Love Universe</h2>
+      <div class="small">A little website, a universe of love.</div>
+    </div>
+    <button class="btn secondary" onclick="logout()">Keluar ↗</button>
+  </header>
+
+  <nav class="nav">
+    <button class="active" onclick="showPage('home',this)">🏠 Beranda</button>
+    <button onclick="showPage('letter',this)">💌 Surat</button>
+    <button onclick="showPage('memories',this)">🌷 Kenangan</button>
+    <button onclick="showPage('reasons',this)">💖 Alasan</button>
+    <button onclick="showPage('prayer',this)">🤲 Doa</button>
+    <button onclick="showPage('surprise',this)">🎁 Kejutan</button>
+  </nav>
+
+  <!-- BERANDA -->
+  <section id="home" class="page active">
+    <div class="panel hero">
+      <div class="big">💐💗</div>
+      <p class="small">A SPECIAL PLACE MADE WITH LOVE</p>
+      <h1 class="gradient">Selamat Datang, Bunda!</h1>
+      <p>
+        Di antara miliaran hal indah di dunia,
+        Bunda adalah salah satu anugerah terindah
+        yang selalu abang syukuri.
+      </p>
+      <button class="btn" onclick="showPage('letter')">
+        Baca Surat Cinta 💌
+      </button>
+    </div>
+
+    <div class="cards">
+      <div class="mini">
+        <div class="emoji">💌</div>
+        <h3>Pesan dari Hati</h3>
+        <p>Setiap kata di sini adalah ungkapan sayang untuk Bunda.</p>
+        <button class="btn secondary" onclick="showPage('letter')">Buka surat</button>
+      </div>
+      <div class="mini">
+        <div class="emoji">🌸</div>
+        <h3>Alasan Menyayangi</h3>
+        <p>Hal-hal sederhana yang membuat Bunda begitu istimewa.</p>
+        <button class="btn secondary" onclick="showPage('reasons')">Lihat alasan</button>
+      </div>
+      <div class="mini">
+        <div class="emoji">🎁</div>
+        <h3>Kejutan Spesial</h3>
+        <p>Ada pesan kecil yang menunggu untuk dibuka.</p>
+        <button class="btn secondary" onclick="showPage('surprise')">Buka kejutan</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SURAT CINTA -->
+  <section id="letter" class="page">
+    <div class="panel">
+      <h1 class="gradient">💌 Surat Kecil untuk Bunda</h1>
+      <p class="small">DARI HATIKU, KHUSUS UNTUK BUNDA</p>
+      <div id="letterText" class="letter">
+Untuk Bundaku tercinta 💗
+
+Bunda, mungkin abang tidak selalu pandai
+mengungkapkan perasaan abang lewat kata-kata.
+Namun, ada satu hal yang selalu ingin abang sampaikan:
+abang sangat menyayangi Bunda.
+
+Terima kasih karena telah memberikan begitu banyak
+kasih sayang, perhatian, dan doa.
+Terima kasih untuk setiap pengorbanan,
+kesabaran, serta hal-hal kecil yang sering kali
+tidak sempat abang ucapkan terima kasih.
+
+Abang tahu, abang belum sempurna.
+Terkadang abang mungkin membuat Bunda khawatir,
+sedih, atau lelah.
+Maafkan abang untuk segala kesalahan yang pernah abang lakukan.
+
+Abang berharap suatu hari nanti abang bisa membuat Bunda
+tersenyum bangga dan merasakan kebahagiaan
+sebesar kasih sayang yang selama ini Bunda berikan.
+
+Semoga Bunda selalu sehat, bahagia,
+dimudahkan segala urusannya, dan dilindungi
+dalam setiap langkah.
+
+Abang mungkin tidak bisa membalas semuanya,
+tetapi abang akan selalu berusaha menjadi anak
+yang lebih baik setiap harinya.
+
+Abang sayang Bunda, hari ini, esok,
+dan sepanjang waktu. 💗
+
+Dengan penuh cinta,
+Anakmu tersayang 💐
+      </div>
+      <button class="btn" onclick="typeLetter()">✨ Efek mengetik</button>
+      <button class="btn secondary" onclick="copyLetter()">Salin surat</button>
+    </div>
+  </section>
+
+  <!-- KENANGAN -->
+  <section id="memories" class="page">
+    <div class="panel">
+      <h1 class="gradient">🌷 Kotak Kenangan</h1>
+      <p>Catat momen indah yang ingin selalu bunda ingat bersama Abang.</p>
+      <input id="memoryTitle" placeholder="Judul kenangan, misalnya: Hari yang indah">
+      <textarea id="memoryBody" rows="4" placeholder="Ceritakan kenanganmu di sini..."></textarea>
+      <button class="btn" onclick="addMemory()">Simpan kenangan 💗</button>
+      <div id="memoryList"></div>
+    </div>
+  </section>
+
+  <!-- ALASAN -->
+  <section id="reasons" class="page">
+    <div class="panel">
+      <h1 class="gradient">💖 Alasan Abang Menyayangi Bunda</h1>
+      <div id="reasonList">
+        <div class="reason">💗 Karena Bunda selalu memberikan kasih sayang.</div>
+        <div class="reason">🌷 Karena doa Bunda begitu berarti dalam hidup abang.</div>
+        <div class="reason">🫶 Karena Bunda selalu berusaha melakukan yang terbaik.</div>
+        <div class="reason">🏡 Karena bersama Bunda, rumah terasa lebih hangat.</div>
+        <div class="reason">😊 Karena senyum Bunda adalah kebahagiaan tersendiri.</div>
+        <div class="reason">💐 Karena Bunda tidak tergantikan oleh siapa pun.</div>
+      </div>
+      <input id="newReason" placeholder="Tambahkan alasan lainnya...">
+      <button class="btn" onclick="addReason()">+ Tambah alasan</button>
+    </div>
+  </section>
+
+  <!-- DOA -->
+  <section id="prayer" class="page">
+    <div class="panel hero">
+      <div class="big">🤲💗</div>
+      <h1 class="gradient">Doa Terbaik untuk Bunda</h1>
+      <p class="letter">
+Ya Allah, jagalah Bundaku dalam setiap langkahnya.
+Berikanlah kesehatan, ketenangan hati,
+umur yang penuh berkah, serta kebahagiaan.
+
+Mudahkanlah segala urusannya,
+kuatkanlah hatinya ketika menghadapi kesulitan,
+dan limpahkanlah kasih sayang serta kebaikan
+dalam kehidupannya.
+
+Ampunilah kesalahannya, bahagiakanlah hatinya,
+dan izinkan abang membalas kebaikannya
+dengan cinta, bakti, dan doa yang tulus.
+
+Aamiin ya Rabbal 'alamin. 🤍
+      </p>
+      <button class="btn" onclick="toast('Aamiin 🤲 Semoga doa terbaik menyertai Bunda.')">
+        Aamiin 🤍
+      </button>
+    </div>
+  </section>
+
+  <!-- KEJUTAN -->
+  <section id="surprise" class="page">
+    <div class="panel hero">
+      <div class="big" id="giftIcon">🎁</div>
+      <h1 class="gradient">Satu Kejutan untuk Bunda</h1>
+      <p id="giftText">Ada pesan rahasia yang telah disiapkan khusus untukmu.</p>
+      <button class="btn" onclick="openGift()">Buka hadiah 💝</button>
+      <div style="margin-top:25px">
+        <button class="btn secondary" onclick="moreHearts()">💗 Hujan Love!</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Dibuat dengan sepenuh hati untuk Bunda 💗<br>
+    <span class="small">You are loved more than words can say.</span>
+  </footer>
+</main>
+
+<script>
+// GANTI NAMA SANDI DI BARIS INI
+const PASSWORD = "dzakiyy";
+
+const $ = id => document.getElementById(id);
+
+$("loginForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  if ($("password").value.trim().toLocaleLowerCase("id") ===
+      PASSWORD.toLocaleLowerCase("id")) {
+    $("login").style.display = "none";
+    $("app").style.display = "block";
+    toast("Selamat datang di dunia cinta untuk Bunda 💗");
+    moreHearts(35);
+  } else {
+    toast("Nama rahasia belum tepat. Coba lagi ya 💌");
+    $("password").value = "";
+  }
+});
+
+function logout() {
+  $("app").style.display = "none";
+  $("login").style.display = "grid";
+  $("password").value = "";
+}
+
+function showPage(id, button) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  $(id).classList.add("active");
+  document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
+
+  if (button) {
+    button.classList.add("active");
+  } else {
+    document.querySelectorAll(".nav button").forEach(b => {
+      if (b.getAttribute("onclick")?.includes("'" + id + "'")) {
+        b.classList.add("active");
+      }
+    });
+  }
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function toast(message) {
+  $("toast").textContent = message;
+  $("toast").style.display = "block";
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => {
+    $("toast").style.display = "none";
+  }, 2600);
+}
+
+// ANIMASI LOVE WARNA-WARNI
+const heartColors = [
+  "#ff4fa3", "#ff83c8", "#b56aff",
+  "#8b5cf6", "#ffcf70", "#ff5f75",
+  "#70e1ff", "#ff9aeb"
+];
+
+function createHeart() {
+  const h = document.createElement("span");
+  h.className = "heart";
+  h.textContent = ["♥", "💗", "💖", "💕", "💜", "💘"][
+    Math.floor(Math.random() * 6)
+  ];
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+  h.style.fontSize = (14 + Math.random() * 24) + "px";
+  h.style.animationDuration = (5 + Math.random() * 7) + "s";
+  $("hearts").appendChild(h);
+  setTimeout(() => h.remove(), 12500);
+}
+setInterval(createHeart, 250);
+
+function moreHearts(count = 45) {
+  for (let i = 0; i < count; i++) {
+    setTimeout(createHeart, i * 45);
+  }
+}
+
+// EFEK MENGETIK SURAT
+const originalLetter = $("letterText").textContent.trim();
+let typingTimer;
+
+function typeLetter() {
+  clearInterval(typingTimer);
+  $("letterText").textContent = "";
+  let i = 0;
+  typingTimer = setInterval(() => {
+    $("letterText").textContent += originalLetter.charAt(i);
+    i++;
+    if (i >= originalLetter.length) clearInterval(typingTimer);
+  }, 24);
+}
+
+async function copyLetter() {
+  try {
+    await navigator.clipboard.writeText(originalLetter);
+    toast("Surat berhasil disalin 💌");
+  } catch {
+    toast("Salin surat secara manual dengan memilih teksnya.");
+  }
+}
+
+// GALERI FOTO
+$("photoInput").addEventListener("change", function() {
+  [...this.files].forEach(file => {
+    if (!file.type.startsWith("image/")) return;
+    const img = document.createElement("img");
+    img.alt = "Foto kenangan bersama Bunda";
+    img.src = URL.createObjectURL(file);
+    $("galleryGrid").appendChild(img);
+  });
+  this.value = "";
+});
+
+// KENANGAN
+function addMemory() {
+  const title = $("memoryTitle").value.trim();
+  const body = $("memoryBody").value.trim();
+  if (!title || !body) return toast("Isi judul dan cerita kenangan dulu ya 🌷");
+
+  const card = document.createElement("div");
+  card.className = "reason";
+  const heading = document.createElement("h3");
+  heading.textContent = "🌷 " + title;
+  const paragraph = document.createElement("p");
+  paragraph.textContent = body;
+  const del = document.createElement("button");
+  del.className = "btn secondary";
+  del.textContent = "Hapus";
+  del.onclick = () => card.remove();
+  card.append(heading, paragraph, del);
+  $("memoryList").prepend(card);
+  $("memoryTitle").value = "";
+  $("memoryBody").value = "";
+  toast("Kenangan ditambahkan 💗");
+}
+
+// ALASAN
+function addReason() {
+  const value = $("newReason").value.trim();
+  if (!value) return toast("Tulis alasanmu terlebih dahulu 💖");
+  const item = document.createElement("div");
+  item.className = "reason";
+  item.textContent = "💗 " + value;
+  $("reasonList").appendChild(item);
+  $("newReason").value = "";
+}
+
+
+// KEJUTAN
+function openGift() {
+  $("giftIcon").textContent = "💖💐💖";
+  $("giftText").textContent =
+    "Bunda, jika suatu hari Bunda merasa lelah, ingatlah bahwa Bunda sangat berarti. Terima kasih telah menjadi bagian terindah dalam hidup abang. Abang sayang Bunda, selalu! 💗";
+  moreHearts(70);
+  toast("Kejutan terbuka! Peluk jauh untuk Bunda 💗");
+}
+</script>
+</body>
+</html>
